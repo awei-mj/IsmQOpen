@@ -66,7 +66,8 @@ int main(int argc, char *argv[])
             cin>>url;
             if(mIsm.find(ism)!=mIsm.end())
             {
-                cout<<"Already exist. Would you like to override? y/n";
+                getchar();
+                cout<<"Already exist. Would you like to override? y/n:";
                 char a = getchar();
                 if(a!='Y'&&a!='y')
                 {
