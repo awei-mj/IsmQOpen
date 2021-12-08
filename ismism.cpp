@@ -2,10 +2,11 @@
 #include <fstream>
 #include <sstream>
 #include <map>
+#include <regex>
 #include <windows.h>
 using namespace std;
 
-//TODO: search name/tag note
+//TODO: name/tag note
 struct IsmInfo
 {
     string title;
@@ -84,9 +85,16 @@ int main(int argc, char *argv[])
                 cout<<p.first<<' '<<p.second.title<<' '<<p.second.url<<endl;
             cout<<mIsm.size()<<" entries in total."<<endl;
         }
+        else if(strcmp(argv[1],"-f")==0)
+        {
+            regex reg(argv[2]);
+            for(auto p : mIsm)
+                if(regex_match(p.first,reg))
+                    cout<<p.first<<' '<<p.second.title<<' '<<p.second.url<<endl;
+        }
         else if(strcmp(argv[1],"-h")==0) //help
         {
-            cout<<"  -o [ism]...\topen\n"<<"  -a \t\tadd\n"<<"  -l \t\tlist\n"<<"  -h \t\thelp\n";
+            cout<<"  -o [ism]...\topen\n"<<"  -a \t\tadd\n"<<"  -l \t\tlist\n"<<"  -f [regex]\tfind\n"<<"  -h \t\thelp\n";
         }
         else //default
         {
